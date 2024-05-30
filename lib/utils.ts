@@ -76,9 +76,9 @@ export function removeKeysFromQuery({
     delete currentUrl[key];
   });
 
-  // Remove null or undefined values
+  // Remove  or undefined values
   Object.keys(currentUrl).forEach(
-    (key) => currentUrl[key] == null && delete currentUrl[key]
+    (key) => currentUrl[key] == "" && delete currentUrl[key]
   );
 
   return `${window.location.pathname}?${qs.stringify(currentUrl)}`;
@@ -86,10 +86,10 @@ export function removeKeysFromQuery({
 
 // DEBOUNCE
 export const debounce = (func: (...args: any[]) => void, delay: number) => {
-  let timeoutId: NodeJS.Timeout | null;
+  let timeoutId: NodeJS.Timeout | "";
   return (...args: any[]) => {
     if (timeoutId) clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(null, args), delay);
+    timeoutId = setTimeout(() => func.apply("", args), delay);
   };
 };
 
@@ -132,7 +132,7 @@ export const download = (url: string, filename: string) => {
 
 // DEEP MERGE OBJECTS
 export const deepMergeObjects = (obj1: any, obj2: any) => {
-  if (obj2 === null || obj2 === undefined) {
+  if (obj2 === "" || obj2 === undefined) {
     return obj1;
   }
 
